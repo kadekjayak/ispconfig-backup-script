@@ -30,7 +30,8 @@ class Web {
      */
     public function getWebs()
     {
-        $query = "SELECT `domain_id`, `server_id`, `domain`, `document_root` FROM web_domain WHERE `active` = 'y' AND `type` = 'vhost'";
+        $server_id = config('server_id');
+        $query = "SELECT `domain_id`, `server_id`, `domain`, `document_root` FROM web_domain WHERE `active` = 'y' AND `type` = 'vhost' AND `server_id` = {$server_id}";
 
         $result = $this->DB->query( $query );
         $this->log( 'FETCHING ALL ACTIVE WEB');
@@ -47,7 +48,6 @@ class Web {
         $query = "SELECT `database_name` FROM web_database WHERE `parent_domain_id` = {$web['domain_id']}";
         $result = $this->DB->query( $query );
 
-        $this->log( 'FETCH WEB DATABASES ' . $web['domain'] );
         return $result->fetch_all( MYSQLI_ASSOC );
     }
 

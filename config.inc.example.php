@@ -8,6 +8,14 @@
     'ispconfig_configuration' => '/usr/local/ispconfig/server/lib/config.inc.php',
 
     /**
+     * Server ID
+     * Your server id, this script can't copy from remote server,
+     * 
+     * @var Integer
+     */
+    'server_id'         => 1,
+
+    /**
      * Add password on archived file (ZIP)
      * 
      * @var String
