@@ -162,7 +162,11 @@ class Web {
             $command = "cd " . dirname( $source_path ) . " && {$command} {$output} " . basename( $source_path );
         }
 
-        shell_exec( $command );
+        $output = shell_exec( $command );
+
+        if ( $output ) {
+            $this->log( $output );
+        }
     }    
 
     /**
