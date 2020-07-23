@@ -197,6 +197,9 @@ class Web {
      */
 	public function runBackup()
 	{
+        // Cleanup Prevous file if any
+        $this->cleanup();
+        
         $this->started_at = date('Y-m-d H:i:s');
         $webs = $this->getWebs();
         $stats = [];
