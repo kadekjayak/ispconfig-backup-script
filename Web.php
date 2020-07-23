@@ -15,7 +15,13 @@ class Web {
     /**
      * Contruct
      */
-    public function __construct(){
+    public function __construct()
+    {
+       $this->connectDb();
+    }
+
+    protected function connectDb()
+    {
         $this->DB = new mysqli( DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE );
         if ( $this->DB->connect_errno ) {
             $this->log("Connect failed: %s\n", $this->DB->connect_error);
@@ -45,6 +51,11 @@ class Web {
      */
     public function getWebDatabases( $web )
     {
+        // on small server Sometimes MySQL gone away after do long archive operation
+        if ( ! $this->DB->ping() ) {
+            $this->connectDb();
+        }
+
         $query = "SELECT `database_name` FROM web_database WHERE `parent_domain_id` = {$web['domain_id']}";
         $result = $this->DB->query( $query );
 
