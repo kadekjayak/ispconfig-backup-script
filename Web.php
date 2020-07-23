@@ -98,7 +98,7 @@ class Web {
     {
         $this->log( 'Compressing Web Files : ' . $web['domain'] );
         $path = sys_get_temp_dir() . "/web.zip";
-        $this->compress( $web['document_root'], $path);
+        $this->compress( $web['document_root'], $path, config('backup_folders') );
 
         return $path;
     }
@@ -147,7 +147,7 @@ class Web {
     /**
      * Compress
      */
-    public function compress( $source_path, $output )
+    public function compress( $source_path, $output, $files = '*' )
     {
         $command = 'zip -r -q ';
         $archive_password = config('archive_password');
@@ -157,7 +157,7 @@ class Web {
         }
 
         if ( is_dir( $source_path ) ) {
-            $command = "cd {$source_path} && {$command} {$output} * ";
+            $command = "cd {$source_path} && {$command} {$output} {$files} ";
         } else {
             $command = "cd " . dirname( $source_path ) . " && {$command} {$output} " . basename( $source_path );
         }

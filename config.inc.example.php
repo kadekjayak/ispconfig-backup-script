@@ -8,6 +8,13 @@
     'ispconfig_configuration' => '/usr/local/ispconfig/server/lib/config.inc.php',
 
     /**
+     * Web Folder to ZIP
+     * 
+     * @var String
+     */
+    'backup_folders'      => 'web private'
+
+    /**
      * Server ID
      * Your server id, this script can't copy from remote server,
      * 
