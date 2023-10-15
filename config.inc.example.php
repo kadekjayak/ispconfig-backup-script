@@ -12,7 +12,7 @@
      * 
      * @var String
      */
-    'backup_folders'      => 'web private'
+    'backup_folders'      => 'web private',
 
     /**
      * Server ID
